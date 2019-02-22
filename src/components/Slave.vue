@@ -19,7 +19,6 @@ export default {
 .flex {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row-reverse;
 }
 .flex > div {
   width: 19%;

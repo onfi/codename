@@ -4,7 +4,7 @@
     <input type="button" value="はじめる" v-on:click="start" v-if="state=='qr'" />
     <img v-bind:src="'https://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=https://onfi.github.io/codename?' + seed" v-if="state=='qr'" />
     <Master v-bind:expect=expect v-if="state=='master'" />
-    <Slave v-bind:expect=expect v-if="state=='slave'" />
+    <Slave v-bind:expect=expect.reverse() v-if="state=='slave'" />
   </div>
 </template>
 
