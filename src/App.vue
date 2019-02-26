@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <input type="button" value="準備" v-on:click="qr" v-if="state=='start'" />
     <input type="button" value="はじめる" v-on:click="start" v-if="state=='qr'" />
     <img v-bind:src="'https://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=https://onfi.github.io/codename?' + seed" v-if="state=='qr'" />
     <Master v-bind:expect=expect v-if="state=='master'" />
@@ -60,13 +59,17 @@ let peoples = [
   [PEOPLE, PEOPLE],
 ]
 let expect
-let state = 'start'
+let state
 let seed
 if(location.search != '') {
   seed = parseInt(location.search.replace(/&.+/,'').replace(/\?/,''))
   expect = reset(seed)
   state = location.search.match(/^\?[0-9]+$/) ? 'slave' : 'master'
-} 
+} else {
+  state = 'qr'
+  seed = Math.floor(Math.random() * 100000)
+  expect = reset(seed)
+}
 function reset(s) {
   console.log(s)
   let random = new Random(s)
@@ -80,11 +83,6 @@ export default {
   },
 
   methods: {
-    qr: function() {
-      this.state = 'qr'
-      this.seed = Math.floor(Math.random() * 100000)
-      this.expect = reset(this.seed)
-    },
     start: function() {
       this.state = 'master'
     }
