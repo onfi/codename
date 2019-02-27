@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'Master',
+  name: 'Slave',
   props: {
     expect: Array
   }
